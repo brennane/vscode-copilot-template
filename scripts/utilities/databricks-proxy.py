@@ -17,7 +17,6 @@ import uvicorn
 # https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/supported-models
 # https://www.databricks.com/product/pricing/foundation-model-serving (costs)
 # https://ciscotap-talos.cloud.databricks.com/ml/endpoints (for costs)
-https://ciscotap-talos.cloud.databricks.com/serving-endpoints/databricks-gpt-oss-120b/invocations
 MODELS = [
     # Newer -> Older
     "databricks-gpt-oss-120b",                 # GPT OSS 120B           Cost: 42.857/214.286 (Est.)
