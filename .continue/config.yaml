@@ -1,0 +1,109 @@
+# https://docs.continue.dev/reference
+name: Local Assistant
+version: 1.0.0
+schema: v1
+models:
+  # brew services start|stop ollama
+  - name: Autodetect
+    provider: ollama
+    model: AUTODETECT
+
+  - name: Llama 4 Maverick
+    provider: openai
+    model: databricks-llama-4-maverick
+    apiBase: http://localhost:13500/v1
+    defaultCompletionOptions:
+      # temperature: 0.3
+      maxTokens: 8100
+
+  - name: Claude Sonnet 4
+    provider: openai
+    model: databricks-claude-sonnet-4
+    apiBase: http://localhost:13500/v1
+    defaultCompletionOptions:
+      # temperature: 0.7
+      maxTokens: 4000
+
+  - name: Claude 3.7 Sonnet
+    provider: openai
+    model: databricks-claude-3-7-sonnet
+    apiBase: http://localhost:13500/v1
+    defaultCompletionOptions:
+      # temperature: 0.7
+      maxTokens: 4000
+
+  - name: Gemma 3.12b
+    provider: openai
+    model: databricks-gemma-3-12b
+    apiBase: http://localhost:13500/v1
+    defaultCompletionOptions:
+      temperature: 0.7
+      maxTokens: 1500
+
+
+# Prefer YAML for project config. To avoid duplication, consider removing config.json after verifying this file.
+systemMessage: |
+  Follow .github/copilot-instructions.md and the chatmode guides in .github/chatmodes/.
+  When a request matches a mode or trigger, adopt that mode and its output structure.
+  Keep edits minimal and focused; prefer small diffs and preserve style.
+  Use append-only anchors for sessions/dev-sessions.md and keep per-task 'Task Working State' blocks
+  inside the task file (distinct from llm-mode cache). Use llm-mode cache to write CACHE.md per
+  docs/guides/cache-task-snippet.md. Produce Markdown-first intermediates; final outputs should be
+  structured for cybersecurity when applicable. Respect licensing: prefer MIT/Apache; avoid GPL/AGPL
+  and note any strong-copyleft risks. Apply quick quality gates (Build, Lint/Typecheck, Tests, Smoke)
+  and report deltas concisely. Follow the tool usage cadence: preface batches with a brief preamble;
+  checkpoint after 3–5 calls or >3 file edits; avoid repetition.
+
+# Disable telemetry by default
+telemetryEnabled: false
+telemetry:
+  enabled: false
+
+# Fine-grained context providers mirroring prior JSON config
+contextProviders:
+  - name: folder
+    params:
+      folders: [".github"]
+      include: ["*.md"]
+      recursive: true
+  - name: folder
+    params:
+      folders: ["docs/guides"]
+      include: ["*.md"]
+      recursive: true
+  - name: folder
+    params:
+      folders: ["tasks/templates"]
+      include: ["*.md"]
+      recursive: true
+  - name: folder
+    params:
+      folders: ["sessions"]
+      include: ["*.md"]
+      recursive: true
+  - name: folder
+    params:
+      folders: ["."]
+      include: ["README.md", "TASKS.md"]
+      recursive: false
+
+
+context:
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: currentFile
+  - provider: terminal
+  - provider: docs
+  - provider: open
+  - provider: web
+  - provider: codebase
+  - provider: search
+  - provider: folder
+  - provider: url
+  - provider: clipboard
+  - provider: tree
+  - provider: problems
+  - provider: debugger
+  - provider: os
+
