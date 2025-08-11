@@ -5,15 +5,18 @@
 1. **Copy this template to new project directory**
 2. **Rename template files**: Remove `-TEMPLATE` suffix from core files
 3. **Customize PROJECT.md**: Update for your specific project goals
-4. **Initialize TASKS.md**: Add your first set of actionable items
-5. **Start first session**: Use `devsession` snippet in VS Code
+4. **Initialize tasks**: Create `tasks/tasks.md` and your first task `tasks/task-0-repo-setup.md`
+5. **Scaffold a project** (optional):
+	- Python: scripts/utilities/scaffold-project.py --type python --name myproj --out ../myproj
+	- Terraform: scripts/utilities/scaffold-project.py --type terraform --name myinfra --out ../myinfra
+6. **Start first session**: Use `devsession` snippet in VS Code
 
 ## Workflow
 
-- Start each session by checking `TASKS.md` for quick wins.
-- Use modular `tasks/TASKN.md` files for focused work.
-- Track sessions in `working/DEV-SESSIONS.llm.md`.
-- Apply 80/20 AI model split (GPT for coding, Claude for analysis).
+- Start each session by checking `tasks/tasks.md` for quick wins.
+- Use modular `tasks/task-N-$shortname.md` files for focused work.
+- Track sessions notes in `sessions/dev-sessions.md`.
+- Apply 80/20 model split between premium and coding models (eg Claude for analysis, GPT for coding).
 
 ## Output Standards
 
@@ -27,4 +30,4 @@
 - 📊 **Session tracking** for continuous improvement
 - 🎯 **Bite-sized tasks** that maintain momentum
 
-See `working/VIBE-CENTRIC-FLOW.llm.md` for detailed workflow guide.
+See `docs/VIBE-CENTRIC-FLOW.llm.md` for detailed workflow guide.

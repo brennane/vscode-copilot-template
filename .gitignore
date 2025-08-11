@@ -1,0 +1,74 @@
+# Temporary files
+*.tmp
+*.log
+tmp/
+
+# IDE files
+.DS_Store
+.vscode/settings.json
+
+#############################
+# Python
+#############################
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.pyre/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+.cache/
+.python-version
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+#############################
+# Terraform
+#############################
+.terraform/
+# state files (sensitive)
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
+crash.*.log
+# variable files (often sensitive)
+*.tfvars
+*.tfvars.json
+# overrides and local plans
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.tfplan
+.terragrunt-cache/
+
+#############################
+# Repo-specific
+#############################
+# LLM cache artifact (regenerate as needed)
+CACHE.md
+# Test artifacts
+tests/**/output/
+tests/**/artifacts/
+test_data/**/output/
+artifacts/

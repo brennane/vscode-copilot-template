@@ -1,4 +1,3 @@
-
 # Dev Session Mode (Development Session Tracking)
 
 ## When to Use
@@ -21,6 +20,23 @@ Activate Dev Session Mode with these command-like triggers or natural language r
 - "Start new dev session"
 - "Log session progress"
 - "End current session"
+
+---
+
+## Append-only Protocol (fast and predictable)
+
+To avoid scanning the whole file, always append below a fixed anchor near the top of the log. Keep a tiny, optional index block above the anchor.
+
+Anchors:
+
+- Index block: `<!-- DEV-SESSIONS:INDEX-START -->` … `<!-- DEV-SESSIONS:INDEX-END -->`
+- Append marker: `<!-- DEV-SESSIONS:APPEND-BELOW -->` (entries go immediately after this line)
+
+Rules:
+
+- Never write above the file title; only update the small Index block if needed
+- Always append new entries immediately after `APPEND-BELOW`
+- Archive monthly to keep files small (see Archive Policy)
 
 ---
 
@@ -68,6 +84,31 @@ Respond using concise, scannable formats for session tracking.
 **Next Session:** [Prep for next work]
 ```
 
+### 5. Quick Log (one-liner)
+
+For ultra-brief updates.
+
+```markdown
+- [YYYY-MM-DD HH:MM] Note: Spent day refactoring the AI agent to build data structures first.
+```
+
+---
+
+## File Template (sessions/dev-sessions.md)
+
+Use this template to standardize anchors and reduce scanning. If the file doesn’t exist, copy from the stub `sessions/dev-sessions.md.stub`.
+
+```markdown
+# Development Sessions Log
+
+<!-- DEV-SESSIONS:INDEX-START -->
+- Latest: YYYY-MM-DD – Short note
+- Archive: sessions/archive/YYYY-MM-dev-sessions.md
+<!-- DEV-SESSIONS:INDEX-END -->
+
+<!-- DEV-SESSIONS:APPEND-BELOW -->
+```
+
 ---
 
 ## Quality Checklist
@@ -85,9 +126,9 @@ Respond using concise, scannable formats for session tracking.
 
 ### Chronological Order
 
-- There is a brief header in the document, do not add entries in the header
-- Find the `Start new entries below` line and add entries after the separator.
-- Keep document chronologically oriented.
+- Do not add entries in the header
+- Add entries immediately after `<!-- DEV-SESSIONS:APPEND-BELOW -->`
+- Keep document chronologically oriented (append-only)
 
 ### Conciseness Guidelines
 
@@ -96,12 +137,12 @@ Respond using concise, scannable formats for session tracking.
 - Focus on decisions and outcomes, not process details
 - Keep individual entries under 10 lines when possible
 
-### File Management
+### File Management (Archive Policy)
 
 - Archive monthly to `sessions/archive/YYYY-MM-dev-sessions.md`
-- Consider splitting at 1000+ lines or 50+ sessions
-- Maintain chronological order (always append)
-- Link to external files for detailed context
+- Rotate when >1000 lines or >50 sessions, whichever first
+- Keep only the current month in `sessions/dev-sessions.md`
+- Update the Index block’s "Latest" line as a tiny summary pointer
 
 ### Session Linking
 
@@ -139,6 +180,13 @@ Respond using concise, scannable formats for session tracking.
 **Metrics:** Medium token usage, high flow state
 **Next Session:** Begin Markdown output validation (Step 5)
 ```
+
+---
+
+## Stub File Handling
+
+- If creating a new template, add `sessions/dev-sessions.md.stub` with the header and anchors above
+- Ensure a task to replace the stub with a real log exists in the current work
 
 ---
 

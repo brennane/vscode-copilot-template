@@ -7,10 +7,11 @@ This project uses several specialized chatmodes to optimize Copilot and LLM work
 |-----------------------|--------------------------------------------------------------------|--------------------------------------|
 | **review-mode**       | Code/architecture review, `review-mode`, `review-mode-*`, "Review this approach", "What are the trade-offs" | review-mode.md                      |
 | **project-review-mode** | Whole-repo/process/strategy review, `project-review`, `project-review-mode`, `project-review-*`, "Assess repo health", "Plan a cleanup sprint" | project-review-mode.md              |
-| **task-mode**         | Task planning, breakdown, or updating `TASKS.md`, `task-mode`, `task-mode-*`, "Plan next sprint", "Break down feature" | task-mode.md                        |
-| **doc-mode**          | Documentation writing/review, `dock-mode`, `doc-mode-*`, "Draft a README", "Improve onboarding" | doc-mode.md                          |
+| **task-mode**         | Task planning, breakdown, or updating `tasks/tasks.md`, `task-mode`, `task-mode-*`, "Plan next sprint", "Break down feature" | task-mode.md                        |
+| **doc-mode**          | Documentation writing/review, `doc-mode`, `doc-mode-*`, "Draft a README", "Improve onboarding" | doc-mode.md                          |
 | **dev-session-mode**  | Development session logging, `dev-session`, `dev-session-*`, "Log session progress" | dev-session-mode.md                 |
-| **repo-mode**         | Repository organization, file cleanup, `repo-mode`, `repo-mode organize [category]`, `tidy-mode cache`, `repo-mode repo`, "Clean up repo structure", "Organize files" | repo-mode.md                        |
+| **repo-mode**         | Repository organization, file cleanup, `repo-mode`, `repo-mode organize [category]`, `repo-mode repo`, "Clean up repo structure", "Organize files" | repo-mode.md                        |
+| **llm-mode**         | `llm-mode`, `llm-mode cache`, `llm-mode prompt`, "Save the agent state", "Help me build an LLM Prompt" | llm-mode.md                        |
 
 **Best Practice:**
 
@@ -107,11 +108,11 @@ When a request matches a trigger phrase or workflow above, refer to the correspo
 
 ## Task Guidance
 
-If a `TASKS.md` file exists, treat it as the authoritative source for current work. It must clearly list actionable steps, reflect the latest project state, and serve as a concise, up-to-date scratch pad for ongoing or multi-step tasks. Ensure formatting is clear and lines are short for easy reading by both humans and Copilot.
+Use `tasks/tasks.md` as the authoritative index for current work. It must clearly list actionable steps, reflect the latest project state, and serve as a concise, up-to-date scratch pad for ongoing or multi-step tasks. If a root `TASKS.md` exists, treat it as a pointer only—do not edit it. Ensure formatting is clear and lines are short for easy reading by both humans and Copilot.
 
 **For all planning, breakdown, and review of project tasks, use the `task-mode` chatmode for best results.**
 
-Always start `TASKS.md` with a **Testing** section that provides explicit instructions for running or validating the current work. Include all relevant scripts, commands, or manual steps needed to verify progress.
+Always start each task file with a **Testing** section that provides explicit instructions for validating the current work. For `tasks/tasks.md` (the index), include quick validation steps for navigating tasks and verifying links.
 
 Use a stepwise table with these columns:
 
@@ -120,7 +121,8 @@ Use a stepwise table with these columns:
 | 1    | TODO         | Short, clear action item. |
 
 - **Step**: Sequential number for each task.
-- **Status**: Use `TODO`, `IN PROGRESS`, or `DONE`.
+- **Status**: Use `TODO`, `IN PROGRESS`, or `DONE`.  
+    You may also use additional statuses such as `OPTIONAL`, `SKIPPED`, or `BLOCKED` as needed for clarity or workflow tracking.
 - **Description**: Concise, explicit explanation of the task, including context and intent.
 
 ### Best Practices
@@ -129,3 +131,50 @@ Use a stepwise table with these columns:
 - Avoid vague or overly broad descriptions.
 - Add context or examples if needed, but keep lines short.
 - Use the table as the primary checklist for ongoing work.
+
+### Templates & Pointers
+- For new tasks, start from `tasks/templates/task-template.md` to ensure a consistent structure and embedded working-state block.
+- For dev sessions, use anchors defined in `dev-session-mode.md` and append entries after `<!-- DEV-SESSIONS:APPEND-BELOW -->`.
+- For prompting and output contracts, see `llm-mode.md`.
+ - Current task pointer: update `CURRENT-TASK.md` in the repo root to link to the active `tasks/task-*.md`; keep it to a single link and no narrative to avoid drift.
+
+## Agent Workflow Essentials
+
+Keep interactions predictable, reproducible, and safe. Favor small, verifiable steps.
+
+### Output Contract (for non-trivial work)
+- State inputs/outputs and error modes up front
+- Produce Markdown-first summary of changes/decisions/risks
+- Apply minimal diffs; preserve existing style and public APIs
+- Report quality gates (PASS/FAIL with deltas only): Build, Lint/Typecheck, Tests, small smoke test
+- Note any new dependencies and licenses; avoid GPL/AGPL or paid-only; propose alternatives if encountered
+
+### Quality Gates (quick)
+- Build: project installs/compiles
+- Lint/Typecheck: no new errors
+- Tests: existing tests pass; add minimal tests if public behavior changes
+- Smoke: run a tiny end-to-end or focused check
+
+### Context & Cache
+- Use `llm-mode cache` to create/update `CACHE.md` at task start and after material changes
+- Keep 5–10 key file pointers max; prune aggressively for clarity
+- See `docs/guides/cache-task-snippet.md` for a reusable snippet and checklist
+
+### Prompting Tips
+- Be explicit about goal, constraints, output format, and acceptance criteria
+- Provide only necessary context (link key files/paths). Avoid overload
+- Ask for a tiny plan/checklist on multi-step tasks; then apply edits
+- Prefer brief rationale or a compact “contract” over long chain-of-thought
+
+### Security & Compliance
+- Do not include secrets; avoid unsolicited network calls
+- Prefer MIT/Apache; flag GPL/AGPL immediately and suggest alternatives
+- Cite file paths for all changes; avoid unverified external code
+
+### Under-specification Policy
+- If details are missing, make 1–2 reasonable assumptions based on repo conventions and proceed
+- State assumptions briefly in Markdown before implementation
+
+### Git & Commits
+- Keep commits atomic and focused; preserve history on moves (`git mv`)
+- When asked for a commit message, write it to `GIT-COMMIT-MESSAGE` in the repo root

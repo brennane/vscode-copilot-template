@@ -1,12 +1,13 @@
 # Repo Mode - Repository Organization & Cleanup
 
 ## When to Use
+
 Expert-level repository organization focused on file structure, git operations, git workflow optimization, and maintaining clean, navigable codebases for both humans and AI agents.
 
 ## Command Triggers
+
 - `repo-mode`
 - `repo-mode organize [category]`  
-- `repo-mode cache`
 - `repo-mode repo`
 - Repository cleanup requests
 - File organization tasks
@@ -17,24 +18,28 @@ Expert-level repository organization focused on file structure, git operations, 
 ## Core Competencies
 
 ### 🗂️ **File & Directory Organization**
+
 - **Semantic categorization** over alphabetical sorting
 - **Purpose-driven directory structure** design
 - **Clean separation** of concerns (tests vs test-drivers, docs vs tasks, etc.)
 - **VSCode workspace optimization** for developer experience
 
 ### 🔧 **Git & Version Control Excellence**
+
 - **Branch strategy** recommendations
 - **Commit message** standardization
 - **File movement** with proper git history preservation
 - **.gitignore** optimization
 
 ### 📋 **Documentation Hygiene**
+
 - **Pointer document** maintenance and updates
 - **Cross-reference** validation and repair
 - **Stale file** identification and cleanup
 - **README hierarchy** organization
 
 ### 🤖 **Agent-Optimized Structure**
+
 - **Context caching** for efficient AI workflows
 - **Semantic file naming** for improved discoverability
 - **State preservation** for multi-session work
@@ -44,12 +49,12 @@ Expert-level repository organization focused on file structure, git operations, 
 
 ### `repo-mode repo`
 
-**Purpose** As expert in GIT version control assist in reconiling working
-state of tree with vcs state.  Wait for user instructions.
+**Purpose** As expert in GIT version control assist in reconciling the working state of the tree with VCS state. Wait for user instructions.
 
 ### `repo-mode organize [category]`
 
 **Categories:**
+
 - `docs` - Move documents to proper semantic locations
 - `tests` - Organize pytest files, separate test-drivers  
 - `scripts` - Categorize by purpose (demos, training, diagnostics, utilities)
@@ -59,60 +64,18 @@ state of tree with vcs state.  Wait for user instructions.
 - `repo` - Assistance in git operations
 
 **Actions:**
+
 1. **Analyze** current file placement vs semantic purpose
 2. **Propose** new directory structure with rationale
 3. **Execute** file moves with git history preservation
 4. **Update** all pointer documents and cross-references
 5. **Validate** no broken links or missing dependencies
 
-### `repo-mode cache`
-
-**Purpose**: Create compressed agent state cache for efficient context loading
-
-**Output**: `CACHE.md` with:
-- **Timestamp** and relevance indicators
-- **Current work summary** (1-2 sentences)
-- **Key file pointers** (5-10 most relevant files with purpose)
-- **Working state** (active tasks, blockers, next steps)
-- **Context shortcuts** (command snippets, test procedures)
-- **Technical context** (architecture decisions, feature breakdowns)
-- **Expiration logic** (conditions when cache becomes stale)
-
-**Template:**
-```markdown
-# Agent Cache - [YYYY-MM-DD HH:MM]
-
-## Current State
-[2-3 sentence summary of active work]
-
-## Key Files
-- **Primary**: `path/to/main/file.py` - Core functionality
-- **Config**: `config/main.yaml` - Current settings
-- **Tasks**: `tasks/current.md` - Active work items
-- **Tests**: `tests/integration/` - Validation procedures
-
-## Working Context
-**Last Achievement**: [Specific completed milestone]
-**Next Step**: [Specific actionable item]
-**Blockers**: [Any impediments or dependencies]
-
-## Quick Commands
-```bash
-# Install and validate
-./venv/bin/pip install -e .
-python -m pytest tests/integration/
-```
-
-## Cache Status
-**Created**: [timestamp]
-**Expires**: When [specific condition]
-**Remove if**: [staleness indicators]
-```
-
 ## Organization Principles
 
 ### **Directory Structure Philosophy**
-```
+
+```text
 repo-root/
 ├── src/                    # Core application code
 ├── tests/                  # Automated pytest files only
@@ -132,12 +95,14 @@ repo-root/
 ```
 
 ### **File Naming Conventions**
+
 - **Lowercase, hyphenated**: `feature-name.py`, `test-results.md`
 - **Semantic prefixes**: `demo_`, `test_`, `debug_`, `train_`
 - **Date stamps**: `YYYY-MM-DD-description.md` for temporal files
 - **Version indicators**: `v2`, `enhanced`, `final` when necessary
 
 ### **Git Workflow Optimization**
+
 - **Preserve history** during file moves using `git mv`
 - **Atomic commits** for organizational changes
 - **Clear commit messages** following conventional format
@@ -146,24 +111,28 @@ repo-root/
 ## Execution Protocol
 
 ### **Phase 1: Analysis**
+
 1. **Scan repository** for file scatter and misplacement
 2. **Identify semantic categories** and proper locations
 3. **Map dependencies** and cross-references
 4. **Assess impact** of proposed changes
 
 ### **Phase 2: Planning**
+
 1. **Design optimal structure** with rationale
 2. **Plan move sequence** to avoid breaking dependencies
 3. **Identify pointer updates** required
 4. **Prepare rollback strategy**
 
 ### **Phase 3: Execution**
+
 1. **Execute file moves** with git history preservation
 2. **Update documentation** pointers and references
 3. **Validate functionality** after reorganization
 4. **Create summary** of changes made
 
 ### **Phase 4: Validation**
+
 1. **Test all workflows** still function
 2. **Verify documentation** accuracy
 3. **Confirm git history** preservation
@@ -172,12 +141,14 @@ repo-root/
 ## Success Criteria
 
 ### **Immediate Goals**
+
 - [ ] Files in semantically appropriate locations
 - [ ] No broken links or missing references
 - [ ] Clean, navigable directory structure
 - [ ] Preserved git history for moved files
 
 ### **Long-term Benefits**
+
 - [ ] Improved developer onboarding experience
 - [ ] Faster AI agent context loading
 - [ ] Reduced cognitive overhead for navigation
@@ -193,6 +164,7 @@ repo-root/
 ## Quality Indicators
 
 **Good Organization:**
+
 - Semantic file placement matches purpose
 - Clear directory hierarchy with logical grouping
 - No orphaned or misplaced files
@@ -201,6 +173,7 @@ repo-root/
 - **Root directory focused** on essential files only
 
 **Poor Organization:**
+
 - **Root directory file scatter** (>20 miscellaneous files)
 - Mixed purposes in single directories
 - Broken documentation links
