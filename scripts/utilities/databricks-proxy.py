@@ -37,19 +37,19 @@ def read_databricks_config(section="DEFAULT"):
     """
     config = configparser.ConfigParser()
     config.read(os.path.expanduser("~/.databrickscfg"))
-        api_key = os.environ.get("DATABRICKS_API_KEY")
-        if api_key:
-            # Workspace must still come from config file or env
-            workspace = os.environ.get("DATABRICKS_HOST")
-            if not workspace:
-                # Try config file for host if env not set
-                workspace = config.get(section, "host", fallback=None)
-            return {"workspace": workspace, "api_key": api_key}
-        # Fallback: config file for both
-        return {
-            "workspace": config.get(section, "host", fallback=None),
-            "api_key": config.get(section, "token", fallback=None),
-        }
+    api_key = os.environ.get("DATABRICKS_API_KEY")
+    if api_key:
+        # Workspace must still come from config file or env
+        workspace = os.environ.get("DATABRICKS_HOST")
+        if not workspace:
+            # Try config file for host if env not set
+            workspace = config.get(section, "host", fallback=None)
+        return {"workspace": workspace, "api_key": api_key}
+    # Fallback: config file for both
+    return {
+        "workspace": config.get(section, "host", fallback=None),
+        "api_key": config.get(section, "token", fallback=None),
+    }
 
 # Setup logging
 logging.basicConfig(
@@ -66,10 +66,9 @@ WORKSPACE = config['workspace']
 
 # Setup argparse
 parser = argparse.ArgumentParser(description="Databricks Proxy Server")
-parser.add_argument("--port", type=int, default=5000, help="Port to run the proxy server on")
+parser.add_argument("--port", type=int, default=13500, help="Port to run the proxy server on [%(default)s]")
 args = parser.parse_args()
 
-if not API_KEY:
 if not API_KEY or not WORKSPACE:
     logger.error("Databricks API key and/or host not found. Set DATABRICKS_API_KEY and DATABRICKS_HOST env vars (preferred for Docker/CI), or ensure both are present in ~/.databrickscfg (DEFAULT section).")
     raise ValueError("Databricks API key and/or host not found. Set DATABRICKS_API_KEY and DATABRICKS_HOST env vars (preferred for Docker/CI), or ensure both are present in ~/.databrickscfg (DEFAULT section).")
