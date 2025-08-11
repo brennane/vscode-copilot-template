@@ -1,0 +1,13 @@
+{
+  "contextProviders": [
+    {
+      "name": "folder",
+      "params": {
+        "folders": [".github"],
+        "include": ["*.md"],
+        "recursive": true
+      }
+    }
+  ],
+  "systemMessage": "Follow the coding guidelines and conventions in .github instruction files. When working in a specific mode (task, doc, review, etc.), follow the corresponding chatmode instructions from .github/chatmodes/ directory."
+}
