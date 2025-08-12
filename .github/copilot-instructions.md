@@ -32,8 +32,7 @@ When a request matches a trigger phrase or workflow above, refer to the correspo
 - Clearly note and alert on any GPLv3, AGPL, or other strong copyleft or paid-license dependencies.
 
 ## Project Purpose
-- Prepare HTML or PDF documents for a cybersecurity pipeline.
-- Convert documents to Markdown, then process with LLMs or other systems to produce structured outputs (e.g., STIX, Vertex Project storm language).
+- Read project purpose from a Markdown file at PURPOSE.md in the root of the repo.
 
 ## Coding Guidelines
 - Write clean, maintainable, and well-documented code.
@@ -108,7 +107,7 @@ When a request matches a trigger phrase or workflow above, refer to the correspo
 
 ## Task Guidance
 
-Use `tasks/tasks.md` as the authoritative index for current work. It must clearly list actionable steps, reflect the latest project state, and serve as a concise, up-to-date scratch pad for ongoing or multi-step tasks. If a root `TASKS.md` exists, treat it as a pointer only‚Äîdo not edit it. Ensure formatting is clear and lines are short for easy reading by both humans and Copilot.
+Use `tasks/tasks.md` as the authoritative index for current work. It must clearly list actionable steps, reflect the latest project state, and serve as a concise, up-to-date scratch pad for ongoing or multi-step tasks. If a root `TASKS.md` exists, treat it as a pointer only‚do not edit it. Ensure formatting is clear and lines are short for easy reading by both humans and Copilot.
 
 **For all planning, breakdown, and review of project tasks, use the `task-mode` chatmode for best results.**
 
@@ -157,14 +156,14 @@ Keep interactions predictable, reproducible, and safe. Favor small, verifiable s
 
 ### Context & Cache
 - Use `llm-mode cache` to create/update `CACHE.md` at task start and after material changes
-- Keep 5‚Äì10 key file pointers max; prune aggressively for clarity
+- Keep 5‚10 key file pointers max; prune aggressively for clarity
 - See `docs/guides/cache-task-snippet.md` for a reusable snippet and checklist
 
 ### Prompting Tips
 - Be explicit about goal, constraints, output format, and acceptance criteria
 - Provide only necessary context (link key files/paths). Avoid overload
 - Ask for a tiny plan/checklist on multi-step tasks; then apply edits
-- Prefer brief rationale or a compact ‚Äúcontract‚Äù over long chain-of-thought
+- Prefer brief rationale or a compact ‚contract‚ over long chain-of-thought
 
 ### Security & Compliance
 - Do not include secrets; avoid unsolicited network calls
@@ -172,7 +171,7 @@ Keep interactions predictable, reproducible, and safe. Favor small, verifiable s
 - Cite file paths for all changes; avoid unverified external code
 
 ### Under-specification Policy
-- If details are missing, make 1‚Äì2 reasonable assumptions based on repo conventions and proceed
+- If details are missing, make 1‚2 reasonable assumptions based on repo conventions and proceed
 - State assumptions briefly in Markdown before implementation
 
 ### Git & Commits
